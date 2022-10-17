@@ -11,7 +11,9 @@ const ResourcesListItem = ({ resource }) => {
       <div className={`${styles.resourceGridItem}`}>
         <div className={`${styles.resourceListItem}`}>
           <Link href={`/resources/${resource.id}`}>
-            <Image className={styles.img} src={profilePic} alt={resource.name} />
+            <div>
+              <Image className={styles.img} src={profilePic} alt={resource.name} />
+            </div>
           </Link>
           <div className="product-list-detail">
             <div className={styles.resourceName}>
