@@ -10,7 +10,6 @@ export default function Home() {
       <Head>
         <title>TEAM CAP</title>
         <meta name="Team CAP" content="Esta es la plataforma desarrollada para la ejecución del FIN" />
-        <link rel="shortcut icon" href="/src/public/vercel.svg" />
       </Head>
 
       <main className={styles.page}>

@@ -11,7 +11,7 @@ function UnuthGuard({ children }) {
 
   useEffect(() => {
     if (!currentUser) {
-      fetch(`http://localhost:3001/api/current_user`)
+      fetch(`http://localhost:3001/api/current_session`)
         .then((response) => {
           if (response.ok) return response.json();
           signOut();
