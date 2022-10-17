@@ -20,7 +20,7 @@ const ResourcePanel = ({ resource, formOptions }) => {
       <div className={styles.wrapEvaluation}>
         <Card title="Evaluación promedio" className={styles.averageSection}>
           <h1>
-            {resource.average_evaluation} <i class="pi pi-star-fill"></i>
+            {resource.average_evaluation} <i className="pi pi-star-fill"></i>
           </h1>
           <LinkButton url={resource.url} />
         </Card>

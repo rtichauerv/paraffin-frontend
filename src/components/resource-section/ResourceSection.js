@@ -7,17 +7,15 @@ import { useRef } from 'react';
 const ResourceSection = ({ resourceId }) => {
   const { data: resourceData, isLoading: isLoadingResource, isError: isErrorResource } = useGet(endpoints('resource', resourceId));
 
-  const { data, isLoading: isLoadingEvaluation, isError: isErrorEvaluation } = useGet(endpoints('resourceEvaluation', resourceId));
+  const { data, isLoading: isLoadingEvaluation, isError: isErrorEvaluation } = useGet(endpoints('resource', resourceId));
 
-  const { data: average_evaluation, isLoading: isLoadingAverage, isError: isErrorAverage, mutate: updateAverage } = useGet(endpoints('resourceAverage', resourceId));
-
-  const { data: evaluations, isLoading: isLoadingEvaluations, isError: isErrorEvaluations, mutate: updateEvaluations } = useGet(endpoints('resourceEvaluations', resourceId));
+  const { data: evaluations, isLoading: isLoadingEvaluations, isError: isErrorEvaluations, mutate: updateEvaluations } = useGet(endpoints('resource', resourceId));
 
   const toast = useRef(null);
 
-  if (isLoadingResource || isLoadingAverage || isLoadingEvaluations || isLoadingEvaluation) return 'loading';
+  if (isLoadingResource || isLoadingEvaluations || isLoadingEvaluation) return 'loading';
 
-  if (isErrorResource || isErrorAverage || isErrorEvaluations || isErrorEvaluation) return 'error';
+  if (isErrorResource || isErrorEvaluations || isErrorEvaluation) return 'error';
 
   const showSuccess = () => toast.current.show({ severity: 'success', summary: 'Tu evaluación quedó registrada', detail: 'Gracias por contribuir!' });
 
@@ -26,21 +24,20 @@ const ResourceSection = ({ resourceId }) => {
       return;
     }
     const requestOptions = {
-      method: 'POST',
+      method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ evaluation: evaluation, comment: comment }),
     };
-    const response = await fetch(endpoints('resourceEvaluation', resourceId), requestOptions);
+    const response = await fetch(endpoints('updateResourceEvaluation', resourceId), requestOptions);
     await response.json();
     updateEvaluations();
-    updateAverage();
     showSuccess();
   }
 
   const resource = {
-    name: resourceData.name,
-    url: resourceData.url,
-    average_evaluation: average_evaluation.average_evaluation,
+    name: data.name,
+    url: data.url,
+    average_evaluation: data.average_evaluation,
   };
 
   const formOptions = {

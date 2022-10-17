@@ -7,11 +7,11 @@ const RatingField = ({ resource }) => {
 
   async function handleNewEvaluation(new_evaluation) {
     const requestOptions = {
-      method: 'POST',
+      method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ evaluation: new_evaluation }),
     };
-    const response = await fetch(endpoints('resourceEvaluation', resource.id), requestOptions);
+    const response = await fetch(endpoints('updateResourceEvaluation', resource.id), requestOptions);
     const data = await response.json();
     setEvaluation(data.evaluation);
     resource.update_evaluation();
